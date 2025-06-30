@@ -6,7 +6,6 @@ export class RegisterUserDTO {
     public phoneNumber: string,
     public address: string,
     public password: string,
-    public userPicture: string | null,
-    public createdAt: Date
+    public userPicture: string | null
   ) {}
 }

@@ -30,8 +30,7 @@ export class UserUsecase {
       user.phoneNumber,
       user.address,
       user.password,
-      user.userPicture,
-      user.createdAt
+      user.userPicture
     );
 
     const result = await this.userRepo.registerUser(data);

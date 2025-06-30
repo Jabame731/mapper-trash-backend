@@ -20,10 +20,11 @@ const userUsecase = new UserUsecase(userRepository);
 
 const userController = new UserController(userUsecase);
 
-const router = Router();
-
 //routes
-app.post("/registerUser", (req, res) => userController.registerUser(req, res));
+app.post("/api/register-user", (req, res) =>
+  userController.registerUser(req, res)
+);
+app.post("/api/login-user", (req, res) => userController.loginUser(req, res));
 
 const port = process.env.PORT;
 

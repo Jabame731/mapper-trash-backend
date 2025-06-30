@@ -57,13 +57,12 @@ export class UserRepositoryIn implements UserRepository {
       const salt = bcrypt.genSaltSync(10);
       const hash = bcrypt.hashSync(user.password, salt);
       const uniqueId = generateUniqueIdentifier();
-      const date = new Date();
 
       //hardcoded for now for registering user  => role is user
       const role = "user";
 
       const [result] = await db.execute(
-        "INSERT INTO users (`uniqueId`, `firstName`, `lastName`, `email`, `phoneNumber`, `address`, `password`, `role`, `createdAt` ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)",
+        "INSERT INTO users (`uniqueId`, `firstName`, `lastName`, `email`, `phoneNumber`, `address`, `password`, `role`) VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
         [
           uniqueId,
           user.firstName,
@@ -73,7 +72,6 @@ export class UserRepositoryIn implements UserRepository {
           user.address,
           hash,
           role,
-          date,
         ]
       );
 

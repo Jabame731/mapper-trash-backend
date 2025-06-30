@@ -6,7 +6,7 @@ export interface User {
   address: string;
   password: string;
   userPicture: string | null;
-  createdAt: Date;
+  createdAt?: Date;
   updatedAt?: Date;
 }
 
