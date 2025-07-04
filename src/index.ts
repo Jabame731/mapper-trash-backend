@@ -3,10 +3,11 @@ import dotenv from "dotenv";
 import bodyParser from "body-parser";
 
 import { UserController } from "./interface";
-
+import { WasteReportController } from "./interface";
 import { UserUsecase } from "./usecases";
-
+import { WasteReportUseCase } from "./usecases";
 import { UserRepositoryIn } from "./infrastructure";
+import { WasteReportRepositoryIn } from "./infrastructure/waste-report-repository/WasteReportRepositoryIn";
 
 const app = express();
 dotenv.config();
@@ -20,11 +21,27 @@ const userUsecase = new UserUsecase(userRepository);
 
 const userController = new UserController(userUsecase);
 
-//routes
+const wasteRepository = new WasteReportRepositoryIn();
+
+const wasteUsecase = new WasteReportUseCase(wasteRepository);
+
+const wasteController = new WasteReportController(wasteUsecase);
+
+// ----- routes ------- //
+
+//user-routes
 app.post("/api/register-user", (req, res) =>
   userController.registerUser(req, res)
 );
 app.post("/api/login-user", (req, res) => userController.loginUser(req, res));
+
+//report-routes
+app.post("/api/report", (req, res) =>
+  wasteController.createWasteReport(req, res)
+);
+app.get("/api/report", (req, res) => wasteController.getWasteReports(req, res));
+
+// ----- end of routes ====== //
 
 const port = process.env.PORT;
 

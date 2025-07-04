@@ -1,3 +1,5 @@
+import { WasteReportQueryParams } from "../waste-reports/report";
+
 export const generateUniqueIdentifier = (): string => {
   const characters =
     "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
@@ -8,3 +10,15 @@ export const generateUniqueIdentifier = (): string => {
   }
   return uniqueIdentifier;
 };
+
+export function normalizeParamsToString(
+  params: WasteReportQueryParams
+): Record<string, string> {
+  const result: Record<string, string> = {};
+  for (const key in params) {
+    if (params[key] !== undefined) {
+      result[key] = String(params[key]);
+    }
+  }
+  return result;
+}
