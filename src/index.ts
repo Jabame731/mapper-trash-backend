@@ -7,8 +7,8 @@ import { WasteReportController } from "./interfaces";
 import { UserUsecase } from "./usecases";
 import { WasteReportUseCase } from "./usecases";
 import { UserRepositoryIn } from "./infrastructure";
-import { WasteReportRepositoryIn } from "./infrastructure/waste-report-repository/WasteReportRepositoryIn";
-import { authenticateToken } from "./interfaces/middleware/authMiddleware";
+import { WasteReportRepositoryIn } from "./infrastructure";
+import { authenticateToken } from "./interfaces";
 
 const app = express();
 dotenv.config();
