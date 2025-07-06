@@ -9,6 +9,7 @@ import {
   UserResponse,
 } from "../../utils";
 import bcrypt from "bcryptjs";
+import jwt from "jsonwebtoken";
 
 export class UserRepositoryIn implements UserRepository {
   async registerUser(
@@ -127,7 +128,7 @@ export class UserRepositoryIn implements UserRepository {
         data.email,
       ]);
 
-      const users = rows as any[];
+      const users = rows as User[];
 
       if (users.length === 0) {
         return {
@@ -154,20 +155,28 @@ export class UserRepositoryIn implements UserRepository {
         };
       }
 
+      const secret = process.env.JWT_SECRET;
+
+      //generate JWT Token
+      const token = jwt.sign(
+        { id: user.id, email: user.email, role: user.role },
+        secret!
+      );
+
       const response: UserResponse = {
-        id: user.uniqueId,
+        id: user.uniqueId!,
         type: "User",
-        role: user.role,
         attributes: {
           firstName: user.firstName,
           lastName: user.lastName,
           email: user.email,
           phoneNumber: user.phoneNumber,
           address: user.address,
-          password: user.password,
           userPicture: null,
           createdAt: user.createdAt,
-        },
+          role: user.role,
+        } as any,
+        token: token,
       };
 
       return {

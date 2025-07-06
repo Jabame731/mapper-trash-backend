@@ -1,4 +1,5 @@
 export interface User {
+  id?: string;
   firstName: string;
   lastName: string;
   email: string;
@@ -8,11 +9,13 @@ export interface User {
   userPicture: string | null;
   createdAt?: Date;
   updatedAt?: Date;
+  uniqueId?: string;
+  role?: string;
 }
 
 export interface UserResponse {
   id: string;
   type: string;
-  role: string;
   attributes: User;
+  token: string;
 }
