@@ -1,13 +1,14 @@
-import express, { Router } from "express";
+import express from "express";
 import dotenv from "dotenv";
 import bodyParser from "body-parser";
 
-import { UserController } from "./interface";
-import { WasteReportController } from "./interface";
+import { UserController } from "./interfaces";
+import { WasteReportController } from "./interfaces";
 import { UserUsecase } from "./usecases";
 import { WasteReportUseCase } from "./usecases";
 import { UserRepositoryIn } from "./infrastructure";
 import { WasteReportRepositoryIn } from "./infrastructure/waste-report-repository/WasteReportRepositoryIn";
+import { authenticateToken } from "./interfaces/middleware/authMiddleware";
 
 const app = express();
 dotenv.config();
@@ -36,7 +37,7 @@ app.post("/api/register-user", (req, res) =>
 app.post("/api/login-user", (req, res) => userController.loginUser(req, res));
 
 //report-routes
-app.post("/api/report", (req, res) =>
+app.post("/api/report", authenticateToken, (req, res) =>
   wasteController.createWasteReport(req, res)
 );
 app.get("/api/report", (req, res) => wasteController.getWasteReports(req, res));

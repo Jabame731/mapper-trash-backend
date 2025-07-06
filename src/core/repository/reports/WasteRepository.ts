@@ -11,6 +11,6 @@ export interface WasteReportRepository {
     report: WasteReportDTO
   ): Promise<Result<SuccessResponse, ErrorResponse>>;
   getWasteReports(
-    params?: WasteReportQueryParams
+    query?: WasteReportQueryParams
   ): Promise<Result<SuccessResponse<WasteReportResponse[]>, ErrorResponse>>;
 }

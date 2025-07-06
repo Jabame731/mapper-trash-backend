@@ -41,11 +41,12 @@ export class WasteReportRepositoryIn implements WasteReportRepository {
       const uniqueId = generateUniqueIdentifier();
 
       const [result] = await db.execute(
-        "INSERT INTO reports (`uniqueId`, `photo`, `description`, `latitude`, `longitude`, `sizeOfTrash`, `status`, `userId`) VALUES (?, ?, ?, ?, ?, ?, ?)",
+        "INSERT INTO waste_reports (`uniqueId`, `photo`, `description`, `location`, `latitude`, `longitude`, `sizeOfTrash`, `status`, `user_id`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)",
         [
           uniqueId,
           photo,
           description,
+          location,
           latitude,
           longitude,
           sizeOfTrash,
@@ -97,7 +98,7 @@ export class WasteReportRepositoryIn implements WasteReportRepository {
 
       const { status, search, userId } = queryParams;
 
-      let query = "SELECT * FROM reports WHERE 1=1";
+      let query = "SELECT * FROM waste_reports WHERE 1=1";
       const queryValues: any[] = [];
 
       if (status) {

@@ -16,5 +16,5 @@ export interface WasteReportResponse {
 }
 
 export interface WasteReportQueryParams {
-  [key: string]: string | number | undefined;
+  [key: string]: any;
 }

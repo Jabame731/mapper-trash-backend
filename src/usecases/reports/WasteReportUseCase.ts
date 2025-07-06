@@ -30,9 +30,9 @@ export class WasteReportUseCase {
   }
 
   async getWasteReports(
-    params: WasteReportQueryParams
+    query: WasteReportQueryParams
   ): Promise<Result<SuccessResponse<WasteReportResponse[]>, ErrorResponse>> {
-    const result = await this.reportRepo.getWasteReports(params);
+    const result = await this.reportRepo.getWasteReports(query);
 
     return result;
   }
